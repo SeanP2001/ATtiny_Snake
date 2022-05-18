@@ -5,72 +5,45 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-#include <ssd1306xled.h>
-#include <font6x8.h>
 #include <EEPROM.h>
 
-#include "Sprites.h"
+#include "Display.h"
+
+
+#define screenWidth 16  
+#define screenHeight 8
+
+Display display;
 
 void setup() 
 {
-  SSD1306.ssd1306_init();             
-  SSD1306.ssd1306_fillscreen(0x00);   // clear the screen
+  
 }
 
 void loop() 
 {
-  for (int y0 = 0; y0 < screenHeight; y0++)
+  for (int y = 0; y < screenHeight; y++)
   {
-    SSD1306.ssd1306_draw_bmp(0, y0, (0 + 8), (y0 + 1), filledBlock);
+    display.block(0, y);
     delay(1000);
-    SSD1306.ssd1306_draw_bmp(0, y0, (0 + 8), (y0 + 1), blankBlock);   
+    display.blank(0, y);   
   } 
 
-  for(int x0 = 0; x0 < screenWidth; x0=x0+8)
+  for(int x = 0; x < screenWidth; x++)
   {
-    if (x0 == 120)
-    {
-      SSD1306.ssd1306_draw_bmp(x0, 0, (x0 + 7), (0 + 1), filledBlock);
-      delay(1000);
-      SSD1306.ssd1306_draw_bmp(x0, 0, (x0 + 7), (0 + 1), blankBlock);
-    }
-    else
-    {
-      SSD1306.ssd1306_draw_bmp(x0, 0, (x0 + 8), (0 + 1), filledBlock);
-      delay(1000);
-      SSD1306.ssd1306_draw_bmp(x0, 0, (x0 + 8), (0 + 1), blankBlock);
-    }   
+    display.block(x, 0);
+    delay(1000);
+    display.blank(x, 0);  
   }
+  
 
-  SSD1306.ssd1306_draw_bmp(0, 0, (0 + 8), (0 + 1), filledBlock);
-  SSD1306.ssd1306_draw_bmp(120, 0, (120 + 7), (0 + 1), filledBlock);
-  SSD1306.ssd1306_draw_bmp(0, 7, (0 + 8), (7 + 1), filledBlock);
-  SSD1306.ssd1306_draw_bmp(120, 7, (120 + 7), (7 + 1), filledBlock);
-
-  delay(3000);
-
-  SSD1306.ssd1306_draw_bmp(0, 0, (0 + 8), (0 + 1), blankBlock);
-  SSD1306.ssd1306_draw_bmp(120, 0, (120 + 7), (0 + 1), blankBlock);
-  SSD1306.ssd1306_draw_bmp(0, 7, (0 + 8), (7 + 1), blankBlock);
-  SSD1306.ssd1306_draw_bmp(120, 7, (120 + 7), (7 + 1), blankBlock);
-
-
-  for (int y0 = 0; y0 < screenHeight; y0++)
+  for (int y = 0; y < screenHeight; y++)
   {
-    for(int x0 = 0; x0 < screenWidth; x0=x0+8)
+    for(int x = 0; x < screenWidth; x++)
     {
-      if (x0 == 120)
-      {
-        SSD1306.ssd1306_draw_bmp(x0, y0, (x0 + 7), (y0 + 1), filledBlock);
-        delay(1000);
-        SSD1306.ssd1306_draw_bmp(x0, y0, (x0 + 7), (y0 + 1), blankBlock);
-      }
-      else
-      {
-        SSD1306.ssd1306_draw_bmp(x0, y0, (x0 + 8), (y0 + 1), filledBlock);
-        delay(1000);
-        SSD1306.ssd1306_draw_bmp(x0, y0, (x0 + 8), (y0 + 1), blankBlock);
-      } 
+      display.block(x, y);
+      delay(1000);
+      display.blank(x, y);  
     }
   } 
 
