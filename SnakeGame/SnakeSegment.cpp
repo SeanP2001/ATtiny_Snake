@@ -20,20 +20,20 @@ void SnakeSegment::erase()
 
 void SnakeSegment::moveLeft()
 {
-  xPos--;
+  this->next = new SnakeSegment(xPos-1, yPos);
 }
 
 void SnakeSegment::moveRight()
 {
-  xPos++;
+  this->next = new SnakeSegment(xPos+1, yPos);
 }
     
 void SnakeSegment::moveUp()
 {
-  yPos--;
+  this->next = new SnakeSegment(xPos, yPos-1);
 }
     
 void SnakeSegment::moveDown()
 {
-  yPos++;
+  this->next = new SnakeSegment(xPos, yPos+1);
 }

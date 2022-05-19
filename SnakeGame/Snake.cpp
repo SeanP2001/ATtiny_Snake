@@ -30,5 +30,18 @@ void Snake::move()
     head->moveRight();
   } 
 
+  
+  head = head->next;
+  
   head->draw();
+
+  //delay(500);
+
+  //end = tail;
+  //tail->erase();
+  //tail = tail->next;
+
+  //end->erase();
+  
+  //free(end);
 }
