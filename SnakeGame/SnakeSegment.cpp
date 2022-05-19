@@ -3,9 +3,9 @@
 
 SnakeSegment::SnakeSegment(uint8_t _xPos, uint8_t _yPos)
 {
-  xPos = _xPos;
-  yPos = _yPos;
-  next = NULL;
+  this->xPos = _xPos;
+  this->yPos = _yPos;
+  this->next = NULL;
 }
 
 void SnakeSegment::draw()

@@ -1,21 +1,21 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.2.0
+// V0.2.1
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 #include <EEPROM.h>
 
 #include "Display.h"
-#include "SnakeSegment.h"
+#include "Snake.h"
 
 #define cols 16  
 #define rows 8
 
 Display display;
 
-SnakeSegment* snakeHead = new SnakeSegment(0, 0);
+Snake snake(0, 0);
 
 void setup() 
 {
@@ -24,30 +24,36 @@ void setup()
 
 void loop() 
 {
-  snakeHead->draw();
+  snake.head->draw();
   delay(500);
+  
   for(int i = 1; i < rows; i++)
   {
-    snakeHead->moveDown();
-    snakeHead->draw();
+    snake.move();
     delay(500);
   }
+
+  snake.direction = Snake::RIGHT;
+  
   for(int i = 1; i < cols; i++)
   {
-    snakeHead->moveRight();
-    snakeHead->draw();
+    snake.move();
     delay(500);
   }
+
+  snake.direction = Snake::UP;
+  
   for(int i = 1; i < rows; i++)
   {
-    snakeHead->moveUp();
-    snakeHead->draw();
+    snake.move();
     delay(500);
   }
+
+  snake.direction = Snake::LEFT;
+  
   for(int i = 1; i < cols-1; i++)
   {
-    snakeHead->moveLeft();
-    snakeHead->draw();
+    snake.move();
     delay(500);
   }
 
