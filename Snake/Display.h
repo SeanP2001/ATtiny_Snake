@@ -2,10 +2,10 @@
 #define _DISPLAY_H_
 
 #include <Arduino.h>
-//#include <ssd1306xled.h>
-//#include <font6x8.h>
+#include <ssd1306xled.h>
+#include <font6x8.h>
 
-//#include "Sprites.h"
+#include "Sprites.h"
 
 
 class Display{

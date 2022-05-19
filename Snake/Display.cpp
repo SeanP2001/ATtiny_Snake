@@ -1,10 +1,6 @@
 
 #include "Display.h"
 
-#include <ssd1306xled.h>
-#include <font6x8.h>
-#include "Sprites.h"
-
 Display::Display()
 {
   SSD1306.ssd1306_init();             

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.1.0
+// V0.1.2
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -9,9 +9,8 @@
 
 #include "Display.h"
 
-
-#define screenWidth 16  
-#define screenHeight 8
+#define cols 16  
+#define rows 8
 
 Display display;
 
@@ -22,14 +21,14 @@ void setup()
 
 void loop() 
 {
-  for (int y = 0; y < screenHeight; y++)
+  for (int y = 0; y < rows; y++)
   {
     display.block(0, y);
     delay(1000);
     display.blank(0, y);   
   } 
 
-  for(int x = 0; x < screenWidth; x++)
+  for(int x = 0; x < cols; x++)
   {
     display.block(x, 0);
     delay(1000);
@@ -37,9 +36,9 @@ void loop()
   }
   
 
-  for (int y = 0; y < screenHeight; y++)
+  for (int y = 0; y < rows; y++)
   {
-    for(int x = 0; x < screenWidth; x++)
+    for(int x = 0; x < cols; x++)
     {
       display.block(x, y);
       delay(1000);
