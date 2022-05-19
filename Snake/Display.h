@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif // _SOUND_H_
+#endif // _DISPLAY_H_
