@@ -25,6 +25,14 @@ public:
     Snake(uint8_t xPos, uint8_t yPos);
 
     void move();
+
+    void grow();
+
+private:
+
+    void moveHead();
+
+    void moveTail();
 };
 
 #endif // _SNAKE_H_
