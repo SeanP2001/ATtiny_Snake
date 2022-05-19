@@ -1,65 +1,63 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.2.4
+// V0.3.0
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 #include <EEPROM.h>
 
 #include "Display.h"
+#include "Button.h"
 #include "Snake.h"
 
 #define cols 16  
 #define rows 8
 
+void checkButtons();                    // checks all of the buttons for user input
+
 Display display;
+
+#define directionButtons A2
+
+Button UP(directionButtons, 67, 78);
+Button DOWN(directionButtons, 150, 200);
+Button LEFT(directionButtons, 230, 255);
+Button RIGHT(directionButtons, 50, 67);
 
 Snake snake(0, 0);
 
 void setup() 
 {
-  
+  snake.head->draw();
+  delay(500);
 }
 
 void loop() 
 {
-  snake.head->draw();
+  checkButtons();
+  
+  snake.move();
   delay(500);
-  
-  for(int i = 1; i < rows; i++)
-  {
-    snake.grow();
-    delay(500);
-  }
+}
 
-  snake.direction = Snake::RIGHT;
-  
-  for(int i = 1; i < cols; i++)
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+void checkButtons()
+{
+  if (LEFT.isPressed())
   {
-    snake.move();
-    delay(500);
+    snake.direction = Snake::LEFT;
   }
-
-  snake.direction = Snake::UP;
-  
-  for(int i = 1; i < rows; i++)
+  if (RIGHT.isPressed())
   {
-    snake.move();
-    delay(500);
+    snake.direction = Snake::RIGHT;
   }
-
-  snake.direction = Snake::LEFT;
-  
-  for(int i = 1; i < cols-1; i++)
+  if (UP.isPressed())
   {
-    snake.move();
-    delay(500);
+    snake.direction = Snake::UP;
   }
-
-  while(1)
+  if (DOWN.isPressed())
   {
-    delay(10000);
+    snake.direction = Snake::DOWN;
   }
-
 }
