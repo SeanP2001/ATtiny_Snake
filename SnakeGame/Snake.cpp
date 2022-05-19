@@ -34,14 +34,13 @@ void Snake::move()
   head = head->next;
   
   head->draw();
-
-  //delay(500);
-
-  //end = tail;
-  //tail->erase();
-  //tail = tail->next;
-
-  //end->erase();
   
-  //free(end);
+
+  end = tail;
+  tail->erase();
+  tail = tail->next;
+
+  end->erase();
+  
+  free(end);
 }
