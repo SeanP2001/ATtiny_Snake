@@ -5,6 +5,9 @@
 
 #include "Display.h"
 
+#define cols 16  
+#define rows 8
+
 extern Display display;
 
 class SnakeSegment{

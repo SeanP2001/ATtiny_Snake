@@ -20,20 +20,49 @@ void SnakeSegment::erase()
 
 void SnakeSegment::moveLeft()
 {
-  this->next = new SnakeSegment(xPos-1, yPos);
+  if (xPos-1 < 0)
+  {
+    this->next = new SnakeSegment(cols-1, yPos);
+  }
+  else
+  {
+    this->next = new SnakeSegment(xPos-1, yPos);
+  }
+  
 }
 
 void SnakeSegment::moveRight()
 {
-  this->next = new SnakeSegment(xPos+1, yPos);
+  if (xPos+1 >= cols)
+  {
+    this->next = new SnakeSegment(0, yPos);
+  }
+  else
+  {
+    this->next = new SnakeSegment(xPos+1, yPos);
+  }
 }
     
 void SnakeSegment::moveUp()
 {
-  this->next = new SnakeSegment(xPos, yPos-1);
+  if (yPos-1 < 0)
+  {
+    this->next = new SnakeSegment(xPos, rows-1);
+  }
+  else
+  {
+    this->next = new SnakeSegment(xPos, yPos-1);
+  }
 }
     
 void SnakeSegment::moveDown()
 {
-  this->next = new SnakeSegment(xPos, yPos+1);
+  if (yPos+1 >= rows)
+  {
+    this->next = new SnakeSegment(xPos, 0);
+  }
+  else
+  {
+    this->next = new SnakeSegment(xPos, yPos+1);
+  }
 }
