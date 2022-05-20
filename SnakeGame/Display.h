@@ -27,7 +27,9 @@ public:
 
   void blankScreen();
 
-  void gameOverScreen();
+  void gameOverScreen(int score);
+
+  void printScore(int score);
 };
 
 
