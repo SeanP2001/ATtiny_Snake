@@ -24,6 +24,10 @@ public:
   void blank(uint8_t x, uint8_t y);
 
   void apple(uint8_t x, uint8_t y);
+
+  void blankScreen();
+
+  void gameOverScreen();
 };
 
 

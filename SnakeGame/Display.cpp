@@ -64,3 +64,15 @@ void Display::apple(uint8_t x, uint8_t y)
 
   SSD1306.ssd1306_draw_bmp(x0, y0, x1, y1, circle);
 }
+
+void Display::blankScreen()
+{
+  SSD1306.ssd1306_fillscreen(0x00); 
+}
+
+void Display::gameOverScreen()
+{
+  SSD1306.ssd1306_fillscreen(0x00);
+  SSD1306.ssd1306_setpos(32, 2);
+  SSD1306.ssd1306_string_font6x8("Game Over");;
+}

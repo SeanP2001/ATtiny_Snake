@@ -78,3 +78,23 @@ bool Snake::isOccupying(uint8_t xPos, uint8_t yPos)
 
   return false;
 }
+
+void Snake::reset()
+{
+  SnakeSegment* current = tail;
+  SnakeSegment* next = NULL;
+
+  while (current != NULL)
+  {
+    next = current->next;
+    free(current);
+    current = next;
+  }
+
+  head = new SnakeSegment(0, 0);
+  tail = head;
+
+  this->direction = DOWN;
+
+  this->length = 1;
+}
