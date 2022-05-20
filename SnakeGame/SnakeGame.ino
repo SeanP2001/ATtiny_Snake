@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.4.1
+// V0.5.0
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -13,6 +13,7 @@
 #include "Apple.h"
 
 void checkButtons();                    // checks all of the buttons for user input
+bool gameIsOver();                      // checks to see if the game is over
 
 Display display;
 
@@ -37,23 +38,26 @@ void setup()
 
 void loop() 
 {
-  checkButtons();
-  
-  snake.move();
-
-  if (apple.isEaten(snake.head->xPos, snake.head->yPos))
+  while(!gameIsOver())
   {
-    snake.grow();
-    do
-    {
-      apple.place();
-            
-    }while(snake.isOccupying(apple.xPos, apple.yPos));
-
-    apple.draw();
-  }
+    checkButtons();
   
-  delay(500);
+    snake.move();
+  
+    if (apple.isEaten(snake.head->xPos, snake.head->yPos))
+    {
+      snake.grow();
+      do
+      {
+        apple.place();
+              
+      }while(snake.isOccupying(apple.xPos, apple.yPos));
+  
+      apple.draw();
+    }
+    
+    delay(500);
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,5 +78,18 @@ void checkButtons()
   if (DOWN.isPressed())
   {
     snake.direction = Snake::DOWN;
+  }
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool gameIsOver()
+{
+  if (snake.isOccupying(snake.head->xPos, snake.head->yPos))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }
