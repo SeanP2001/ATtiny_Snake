@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.3.1
+// V0.4.0
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -10,6 +10,7 @@
 #include "Display.h"
 #include "Button.h"
 #include "Snake.h"
+#include "Apple.h"
 
 void checkButtons();                    // checks all of the buttons for user input
 
@@ -24,8 +25,11 @@ Button RIGHT(directionButtons, 50, 67);
 
 Snake snake(0, 0);
 
+Apple apple;
+
 void setup() 
 {
+  apple.place();
   snake.head->draw();
   delay(500);
 }
@@ -35,6 +39,22 @@ void loop()
   checkButtons();
   
   snake.move();
+
+  if (apple.isEaten(snake.head->xPos, snake.head->yPos))
+  {
+    snake.grow();
+    do
+    {
+      apple.place();
+
+      if (snake.isOccupying(apple.xPos, apple.yPos))
+      {
+        display.block(apple.xPos, apple.yPos);
+      }
+      
+    }while(snake.isOccupying(apple.xPos, apple.yPos));
+  }
+  
   delay(500);
 }
 

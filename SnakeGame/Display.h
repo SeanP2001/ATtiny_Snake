@@ -7,6 +7,8 @@
 
 #include "Sprites.h"
 
+#define cols 16  
+#define rows 8
 
 class Display{
 public:

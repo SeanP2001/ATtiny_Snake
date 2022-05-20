@@ -61,3 +61,20 @@ void Snake::moveTail()
   tail->erase();
   tail = tail->next;
 }
+
+bool Snake::isOccupying(uint8_t xPos, uint8_t yPos)
+{
+  SnakeSegment* check = tail;
+
+  while (check->next != NULL)
+  {
+    if ((xPos == check->xPos) && (yPos == check->yPos))
+    {
+      return true;
+    }
+
+    check = check->next;
+  }
+
+  return false;
+}

@@ -28,6 +28,8 @@ public:
 
     void grow();
 
+    bool isOccupying(uint8_t xPos, uint8_t yPos);
+
 private:
 
     void moveHead();
