@@ -70,7 +70,7 @@ void Display::blankScreen()
   SSD1306.ssd1306_fillscreen(0x00); 
 }
 
-void Display::gameOverScreen(int score)
+void Display::gameOverScreen(int score, int highScore)
 {
   SSD1306.ssd1306_fillscreen(0x00);
   SSD1306.ssd1306_setpos(32, 2);
@@ -78,6 +78,19 @@ void Display::gameOverScreen(int score)
   
   SSD1306.ssd1306_setpos(32, 4);
   printScore(score);
+
+  SSD1306.ssd1306_setpos(2, 6);
+  printHighScore(highScore);
+}
+
+void Display::newHighScoreScreen(int highScore)
+{
+  SSD1306.ssd1306_fillscreen(0x00);
+  SSD1306.ssd1306_setpos(16, 3);
+  SSD1306.ssd1306_string_font6x8("New High Score");
+
+  SSD1306.ssd1306_setpos(2, 5);
+  printHighScore(highScore);
 }
 
 void Display::printScore(int score)
@@ -87,4 +100,13 @@ void Display::printScore(int score)
   SSD1306.ssd1306_string_font6x8("Score: ");
   itoa(score, scoreStr, 10);  
   SSD1306.ssd1306_string_font6x8(scoreStr);
+}
+
+void Display::printHighScore(int highScore)
+{
+  char highScoreStr[5];
+
+  SSD1306.ssd1306_string_font6x8("High Score: ");
+  itoa(highScore, highScoreStr, 10);
+  SSD1306.ssd1306_string_font6x8(highScoreStr);  
 }

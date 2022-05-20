@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.6.0
+// V0.6.1
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -29,10 +29,11 @@ Snake snake(0, 0);
 Apple apple;
 
 int score = 0;
+int highScore = 0;
 
 void setup() 
 {
-  
+  EEPROM.get(0, highScore);                                        // Load the high score from EEPROM
 }
 
 void loop() 
@@ -68,7 +69,16 @@ void loop()
 
   delay(1000);
 
-  display.gameOverScreen(score);
+  if (score > highScore)
+  {
+    highScore = score;
+    EEPROM.put(0, highScore);
+    display.newHighScoreScreen(highScore);
+    delay(2000);
+  }
+
+  display.gameOverScreen(score, highScore);
+
 
   delay(2000);
 
