@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.4.0
+// V0.4.1
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -30,6 +30,7 @@ Apple apple;
 void setup() 
 {
   apple.place();
+  apple.draw();
   snake.head->draw();
   delay(500);
 }
@@ -46,13 +47,10 @@ void loop()
     do
     {
       apple.place();
-
-      if (snake.isOccupying(apple.xPos, apple.yPos))
-      {
-        display.block(apple.xPos, apple.yPos);
-      }
-      
+            
     }while(snake.isOccupying(apple.xPos, apple.yPos));
+
+    apple.draw();
   }
   
   delay(500);

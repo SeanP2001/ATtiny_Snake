@@ -16,8 +16,6 @@ void Apple::place()
 {
   xPos = rand() % cols;
   yPos = rand() % rows;
-
-  draw();
 }
 
 bool Apple::isEaten(uint8_t x, uint8_t y)
