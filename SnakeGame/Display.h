@@ -7,9 +7,6 @@
 
 #include "Sprites.h"
 
-#define cols 16  
-#define rows 8
-
 class Display{
 public:
   uint8_t x0;
@@ -26,6 +23,8 @@ public:
   void apple(uint8_t x, uint8_t y);
 
   void blankScreen();
+
+  void titleScreen();
 
   void gameOverScreen(int score, int highScore);
   

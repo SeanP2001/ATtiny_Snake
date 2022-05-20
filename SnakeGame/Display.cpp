@@ -70,6 +70,52 @@ void Display::blankScreen()
   SSD1306.ssd1306_fillscreen(0x00); 
 }
 
+void Display::titleScreen()
+{
+  SSD1306.ssd1306_fillscreen(0x00);
+
+  SSD1306.ssd1306_draw_bmp(0, 0, 128, 8, title);
+
+  apple(7,0);
+  
+  int x = 0;
+  int y = 7;
+
+  block(x, y);
+  delay(100);
+  
+  while (x<3)
+  {
+    x++;
+    block(x, y);
+    delay(100);
+  }
+  while (y>2)
+  {
+    y--;
+    block(x, y);
+    delay(100);
+  }
+  while (x>0)
+  {
+    x--;
+    block(x, y);
+    delay(100);
+  }
+  while (y>0)
+  {
+    y--;
+    block(x, y);
+    delay(100);
+  }
+  while (x<5)
+  {
+    x++;
+    block(x, y);
+    delay(100);
+  }
+}
+
 void Display::gameOverScreen(int score, int highScore)
 {
   SSD1306.ssd1306_fillscreen(0x00);

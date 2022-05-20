@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.6.1
+// V0.7.0
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -34,6 +34,10 @@ int highScore = 0;
 void setup() 
 {
   EEPROM.get(0, highScore);                                        // Load the high score from EEPROM
+  display.blankScreen();
+  display.titleScreen();
+  delay(500);
+  display.blankScreen();
 }
 
 void loop() 
@@ -78,7 +82,6 @@ void loop()
   }
 
   display.gameOverScreen(score, highScore);
-
 
   delay(2000);
 
