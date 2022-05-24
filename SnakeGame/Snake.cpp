@@ -58,7 +58,6 @@ void Snake::moveHead()
 void Snake::moveTail()
 {
   end = tail;
-  //tail->erase();
   tail = tail->next;
 }
 

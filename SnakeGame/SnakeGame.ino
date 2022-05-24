@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.7.2
+// V0.8.0
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -11,6 +11,7 @@
 #include "Button.h"
 #include "Snake.h"
 #include "Apple.h"
+#include "Sound.h"
 
 void checkButtons();                    // checks all of the buttons for user input
 bool gameIsOver();                      // checks to see if the game is over
@@ -24,6 +25,9 @@ Button DOWN(directionButtons, 150, 200);
 Button LEFT(directionButtons, 230, 255);
 Button RIGHT(directionButtons, 50, 67);
 
+#define buzzerPin 1
+Sound sound(buzzerPin);
+
 Snake snake(0, 0);
 
 Apple apple;
@@ -36,6 +40,7 @@ void setup()
   EEPROM.get(0, highScore);                                        // Load the high score from EEPROM
   display.blankScreen();
   display.titleScreen();
+  sound.eating();
   delay(500);
   display.blankScreen();
 }
@@ -55,6 +60,8 @@ void loop()
   
     if (apple.isEaten(snake.head->xPos, snake.head->yPos))
     {
+      sound.eating();
+      
       snake.grow();
 
       score++;
@@ -78,10 +85,13 @@ void loop()
     highScore = score;
     EEPROM.put(0, highScore);
     display.newHighScoreScreen(highScore);
+    sound.highScore();
     delay(2000);
   }
 
   display.gameOverScreen(score, highScore);
+
+  sound.gameOver();
 
   delay(2000);
 
