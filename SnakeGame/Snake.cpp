@@ -12,16 +12,16 @@ Snake::Snake(uint8_t xPos, uint8_t yPos)
 }
 
 void Snake::move()
-{
+{ 
   moveHead();
   
-  head->draw();
-  
   moveTail();
-  
+
   end->erase();
-  
+
   free(end);
+  
+  head->draw();
 }
 
 void Snake::grow()
@@ -58,7 +58,7 @@ void Snake::moveHead()
 void Snake::moveTail()
 {
   end = tail;
-  tail->erase();
+  //tail->erase();
   tail = tail->next;
 }
 
