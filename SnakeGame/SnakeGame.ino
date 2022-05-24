@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.7.0
+// V0.7.2
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -95,19 +95,19 @@ void loop()
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void checkButtons()
 {
-  if (LEFT.isPressed())
+  if (LEFT.isPressed() && snake.direction != Snake::RIGHT)
   {
     snake.direction = Snake::LEFT;
   }
-  if (RIGHT.isPressed())
+  if (RIGHT.isPressed() && snake.direction != Snake::LEFT)
   {
     snake.direction = Snake::RIGHT;
   }
-  if (UP.isPressed())
+  if (UP.isPressed() && snake.direction != Snake::DOWN)
   {
     snake.direction = Snake::UP;
   }
-  if (DOWN.isPressed())
+  if (DOWN.isPressed() && snake.direction != Snake::UP)
   {
     snake.direction = Snake::DOWN;
   }
