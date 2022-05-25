@@ -66,11 +66,29 @@ void Snake::moveTail()
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+bool Snake::collided()
+{
+  SnakeSegment* check = tail;                                        // create a pointer to check the snake segments
+ 
+  while (check->next != NULL)                                        // go through each segment of the snake
+  { 
+    if ((head->xPos == check->xPos) && (head->yPos == check->yPos))  // checking if the snake head coordinates match the coordinates of that segment
+    {
+      return true;                                                   // if it does then the snake has collided
+    }
+
+    check = check->next;                                             // move onto the next segment
+  }
+
+  return false;                                                      // if all of the segments have been checked, with no matches, then the snake has not collided
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Snake::isOccupying(uint8_t xPos, uint8_t yPos)
 {
   SnakeSegment* check = tail;                              // create a pointer to check the snake segments
  
-  while (check->next != NULL)                              // go through each segment of the snake
+  while (check != NULL)                                    // go through each segment of the snake
   { 
     if ((xPos == check->xPos) && (yPos == check->yPos))    // checking if the argument coordinates match the coordinates of that segment
     {
