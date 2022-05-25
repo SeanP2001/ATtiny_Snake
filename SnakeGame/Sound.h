@@ -14,7 +14,7 @@ public:
 
   Sound(uint8_t _buzzerPin);
 
-  void eating();
+  void eating(int duration);
   void highScore();
   void gameOver();
   void note (int n, int octave);

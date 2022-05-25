@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // ATtiny: Snake
 // Sean Price
-// V0.8.0
+// V0.8.1
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -35,13 +35,14 @@ Apple apple;
 int score = 0;
 int highScore = 0;
 
+int refreshDelay = 250;
+
 void setup() 
 {
   EEPROM.get(0, highScore);                                        // Load the high score from EEPROM
   display.blankScreen();
   display.titleScreen();
-  sound.eating();
-  delay(500);
+  sound.eating(refreshDelay);
   display.blankScreen();
 }
 
@@ -60,7 +61,7 @@ void loop()
   
     if (apple.isEaten(snake.head->xPos, snake.head->yPos))
     {
-      sound.eating();
+      sound.eating(refreshDelay);
       
       snake.grow();
 
@@ -74,8 +75,10 @@ void loop()
   
       apple.draw();
     }
-    
-    delay(500);
+    else
+    {
+      delay(refreshDelay);
+    } 
   }
 
   delay(1000);

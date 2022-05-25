@@ -10,12 +10,12 @@ Sound::Sound(uint8_t _buzzerPin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
-void Sound::eating()
+void Sound::eating(int duration)
 {
   note(0, 4);
-  delay(20);
+  delay(duration/2);
   note(3, 4);
-  delay(20);
+  delay(duration/2);
   note(0, 0);  
 }
 
