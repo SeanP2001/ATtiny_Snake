@@ -1,6 +1,7 @@
 
 #include "Snake.h"
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Snake::Snake(uint8_t xPos, uint8_t yPos)
 {
   this->head = new SnakeSegment(xPos, yPos);
@@ -11,6 +12,7 @@ Snake::Snake(uint8_t xPos, uint8_t yPos)
   this->length = 1;
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Snake::move()
 { 
   moveHead();
@@ -18,12 +20,12 @@ void Snake::move()
   moveTail();
 
   end->erase();
-
   free(end);
   
   head->draw();
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Snake::grow()
 {
   moveHead();
@@ -33,9 +35,10 @@ void Snake::grow()
   length++;
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Snake::moveHead()
 {
-  if (direction == UP)
+  if (direction == UP)           // depending on the snake direction, move the snake head that way
   {
     head->moveUp();
   }
@@ -55,45 +58,48 @@ void Snake::moveHead()
   head = head->next;
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Snake::moveTail()
 {
   end = tail;
   tail = tail->next;
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 bool Snake::isOccupying(uint8_t xPos, uint8_t yPos)
 {
-  SnakeSegment* check = tail;
-
-  while (check->next != NULL)
-  {
-    if ((xPos == check->xPos) && (yPos == check->yPos))
+  SnakeSegment* check = tail;                              // create a pointer to check the snake segments
+ 
+  while (check->next != NULL)                              // go through each segment of the snake
+  { 
+    if ((xPos == check->xPos) && (yPos == check->yPos))    // checking if the argument coordinates match the coordinates of that segment
     {
-      return true;
+      return true;                                         // if it does then the snake is occupying that space
     }
 
-    check = check->next;
+    check = check->next;                                   // move onto the next segment
   }
 
-  return false;
+  return false;                                            // if all of the segments have been checked, with no matches, then the snake is not occupying that space
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Snake::reset()
 {
   SnakeSegment* current = tail;
   SnakeSegment* next = NULL;
 
-  while (current != NULL)
+  while (current != NULL)                                 // go through all of the snake's segments
   {
     next = current->next;
-    free(current);
+    free(current);                                        // freeing each memory address
     current = next;
   }
 
-  head = new SnakeSegment(0, 0);
+  head = new SnakeSegment(0, 0);                          // create a new snake
   tail = head;
 
-  this->direction = DOWN;
+  this->direction = DOWN;                                 
 
   this->length = 1;
 }

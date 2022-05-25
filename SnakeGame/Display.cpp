@@ -1,12 +1,14 @@
 
 #include "Display.h"
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Display::Display()
 {
   SSD1306.ssd1306_init();             
   SSD1306.ssd1306_fillscreen(0x00); 
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::block(uint8_t x, uint8_t y)
 {
   x0 = x * 8;
@@ -26,6 +28,7 @@ void Display::block(uint8_t x, uint8_t y)
   SSD1306.ssd1306_draw_bmp(x0, y0, x1, y1, filledBlock);
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::blank(uint8_t x, uint8_t y)
 {
   x0 = x * 8;
@@ -45,6 +48,7 @@ void Display::blank(uint8_t x, uint8_t y)
   SSD1306.ssd1306_draw_bmp(x0, y0, x1, y1, blankBlock);
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::apple(uint8_t x, uint8_t y)
 {
   x0 = x * 8;
@@ -65,57 +69,60 @@ void Display::apple(uint8_t x, uint8_t y)
   SSD1306.ssd1306_draw_bmp(x0, y0, x1, y1, circle);
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::blankScreen()
 {
   SSD1306.ssd1306_fillscreen(0x00); 
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::titleScreen()
 {
-  SSD1306.ssd1306_fillscreen(0x00);
+  blankScreen();                                    
 
-  SSD1306.ssd1306_draw_bmp(0, 0, 128, 8, title);
+  SSD1306.ssd1306_draw_bmp(0, 0, 128, 8, title);     // draw the "nake" part of the title
 
-  apple(7,0);
-  
-  int x = 0;
+  apple(7,0);                                        // draw the apple
+    
+  int x = 0;                                         // all of the following code creates the "S" animation
   int y = 7;
 
   block(x, y);
-  delay(100);
+  delay(titleScreenDelay);
   
   while (x<3)
   {
     x++;
     block(x, y);
-    delay(100);
+    delay(titleScreenDelay);
   }
   while (y>2)
   {
     y--;
     block(x, y);
-    delay(100);
+    delay(titleScreenDelay);
   }
   while (x>0)
   {
     x--;
     block(x, y);
-    delay(100);
+    delay(titleScreenDelay);
   }
   while (y>0)
   {
     y--;
     block(x, y);
-    delay(100);
+    delay(titleScreenDelay);
   }
   while (x<5)
   {
     x++;
     block(x, y);
-    delay(100);
+    delay(titleScreenDelay);
   }
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::gameOverScreen(int score, int highScore)
 {
   SSD1306.ssd1306_fillscreen(0x00);
@@ -129,6 +136,7 @@ void Display::gameOverScreen(int score, int highScore)
   printHighScore(highScore);
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::newHighScoreScreen(int highScore)
 {
   SSD1306.ssd1306_fillscreen(0x00);
@@ -139,20 +147,22 @@ void Display::newHighScoreScreen(int highScore)
   printHighScore(highScore);
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::printScore(int score)
 {
   char scoreStr[5];
   
   SSD1306.ssd1306_string_font6x8("Score: ");
-  itoa(score, scoreStr, 10);  
-  SSD1306.ssd1306_string_font6x8(scoreStr);
+  itoa(score, scoreStr, 10);                       // convert the score to a string
+  SSD1306.ssd1306_string_font6x8(scoreStr);        // display the score string
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void Display::printHighScore(int highScore)
 {
   char highScoreStr[5];
 
   SSD1306.ssd1306_string_font6x8("High Score: ");
-  itoa(highScore, highScoreStr, 10);
-  SSD1306.ssd1306_string_font6x8(highScoreStr);  
+  itoa(highScore, highScoreStr, 10);               // convert the score to a string
+  SSD1306.ssd1306_string_font6x8(highScoreStr);    // display the score string
 }

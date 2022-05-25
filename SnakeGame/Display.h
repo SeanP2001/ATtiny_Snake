@@ -7,6 +7,8 @@
 
 #include "Sprites.h"
 
+#define titleScreenDelay 100                   
+
 class Display{
 public:
   uint8_t x0;
