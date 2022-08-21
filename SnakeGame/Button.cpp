@@ -13,7 +13,7 @@ bool Button::isPressed()
 {
   buttonValue = analogRead(pin);                                                                // read the button pin output
   
-  if ((buttonValue >= lowerBound) && (buttonValue < upperBound))                                // if it is in the button range, set the button state HIGH
+  if ((buttonValue > lowerBound) && (buttonValue <= upperBound))                                // if it is in the button range, set the button state HIGH
     return true;
   else
     return false;                                                    
